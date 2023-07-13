@@ -1,0 +1,77 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.1.0'
+	id 'io.spring.dependency-management' version '1.1.0'
+	id "com.google.protobuf" version "0.9.3"
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'com.google.protobuf:protobuf-java:3.23.0'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+	testImplementation 'io.projectreactor:reactor-test'
+	implementation 'com.google.protobuf:protobuf-java-util:4.0.0-rc-2'
+
+//grpc
+	implementation group: 'io.grpc', name: 'grpc-netty', version: '1.29.0'
+	implementation group: 'io.grpc', name: 'grpc-protobuf', version: '1.29.0'
+	implementation group: 'io.grpc', name: 'grpc-stub', version: '1.29.0'
+	implementation 'javax.annotation:javax.annotation-api:1.3.2'
+	implementation 'com.googlecode.json-simple:json-simple:1.1'
+
+}
+
+protobuf {
+// Configure the protoc executable
+	protoc {
+// Download from repositories
+		artifact = 'com.google.protobuf:protoc:3.0.0'
+	}
+
+	plugins {
+		grpc { artifact = "io.grpc:protoc-gen-grpc-java:1.29.0" }
+	}
+
+	generateProtoTasks {
+// all() returns the collection of all protoc tasks
+		all().configureEach { task ->
+// Here you can configure the task
+			task.plugins {
+				grpc {}
+			}
+
+		}
+
+// In addition to all(), you may select tasks by various criteria:
+
+// (Java-only) returns tasks for a sourceSet
+		ofSourceSet('main')
+
+// (Android-only selectors)
+// Returns tasks for a flavor
+		ofFlavor('demo')
+// Returns tasks for a buildType
+		ofBuildType('release')
+// Returns tasks for a variant
+		ofVariant('demoRelease')
+// Returns non-androidTest tasks
+		ofNonTest()
+// Return androidTest tasks
+		ofTest()
+	}
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

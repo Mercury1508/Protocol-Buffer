@@ -1,0 +1,23 @@
+{
+  "name": "Hriday Garg",
+  "id": 12,
+  "email": "abc@gmail.com",
+  "phones": [{
+    "number": "9999999999",
+    "type": "HOME"
+  }, {
+    "number": "7777777777",
+    "type": "WORK"
+  }]
+}{
+  "name": "Mercury",
+  "id": 134,
+  "email": "abc@gmail.com",
+  "phones": [{
+    "number": "7654334567",
+    "type": "HOME"
+  }]
+}{
+  "name": "Hrid",
+  "id": 789
+}

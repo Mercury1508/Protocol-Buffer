@@ -1,0 +1,19 @@
+option java_multiple_files = true;
+option java_package = "com.example.proto";
+option java_outer_classname = "AddressProto";
+
+message Address{
+
+    required int32 house_number = 1;
+    required string apartment = 2;
+    required int32 sector = 3;
+    required string landmark = 4;
+    required string city = 5;
+    required string state = 6;
+    required string pincode = 7;
+    required string country = 8;
+    required string continent = 9;
+    required string planet = 10;
+}
+
+
